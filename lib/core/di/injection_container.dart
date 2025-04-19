@@ -3,6 +3,12 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../features/theme/data/datasources/theme_local_data_source.dart';
 import '../../../features/theme/data/repositories/theme_repository_impl.dart';
+import '../../features/localization/data/datasources/locale_local_data_source.dart';
+import '../../features/localization/data/repositories/locale_repository_impl.dart';
+import '../../features/localization/domain/repositories/locale_repository.dart';
+import '../../features/localization/domain/usecases/get_locale_usecase.dart';
+import '../../features/localization/domain/usecases/set_locale_usecase.dart';
+import '../../features/localization/presentation/manager/locale_cubit.dart';
 import '../../features/theme/domain/usecases/get_theme_mode_usecase.dart';
 import '../../features/theme/domain/usecases/set_theme_mode_usecase.dart';
 import '../../features/theme/domain/repositories/theme_repository.dart';
@@ -36,6 +42,23 @@ Future<void> init() async {
   sl.registerLazySingleton<ThemeLocalDataSource>(
     () => ThemeLocalDataSourceImpl(sharedPreferences: sl()),
   );
+
+  // Features - Localization
+  // Bloc / Cubit
+  sl.registerFactory(
+      () => LocaleCubit(getLocaleUseCase: sl(), setLocaleUseCase: sl()));
+
+  // Use cases
+  sl.registerLazySingleton(() => GetLocaleUseCase(sl()));
+  sl.registerLazySingleton(() => SetLocaleUseCase(sl()));
+
+  // Repository
+  sl.registerLazySingleton<LocaleRepository>(
+      () => LocaleRepositoryImpl(localDataSource: sl()));
+
+  // Data sources
+  sl.registerLazySingleton<LocaleLocalDataSource>(
+      () => LocaleLocalDataSourceImpl(sharedPreferences: sl()));
 
   // Core / External
   // Register SharedPreferences as a singleton instance

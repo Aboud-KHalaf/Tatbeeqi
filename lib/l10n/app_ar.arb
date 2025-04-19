@@ -1,0 +1,8 @@
+{
+  "@@locale": "ar",
+  "helloWorld": "أهلاً بالعالم!",
+  "@helloWorld": {
+    "description": "تحية"
+  },
+  "languagePrompt": "اختر لغتك:"
+}

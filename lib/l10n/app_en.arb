@@ -1,0 +1,8 @@
+{
+  "@@locale": "en",
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "A greeting"
+  },
+  "languagePrompt": "Select your language:"
+}
