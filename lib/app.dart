@@ -5,7 +5,8 @@ import 'package:tatbeeqi/features/localization/presentation/manager/locale_cubit
 import 'package:tatbeeqi/features/localization/presentation/manager/locale_state.dart';
 // Import your generated AppLocalizations delegate
 // Make sure you have run `flutter gen-l10n`
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Adjust path if needed
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tatbeeqi/features/notifications/presentation/manager/notification_cubit/notification_cubit.dart'; // Adjust path if needed
 
 class AppView extends StatelessWidget {
   const AppView({super.key});
@@ -70,6 +71,23 @@ class HomePage extends StatelessWidget {
               },
               child: const Text('العربية'),
             ),
+            const SizedBox(height: 20), // Add some space
+            // --- Add Test Button ---
+            ElevatedButton(
+              onPressed: () {
+                // Use a unique ID (e.g., timestamp or a counter)
+                final int notificationId =
+                    DateTime.now().millisecondsSinceEpoch % 100000;
+                context.read<NotificationCubit>().showLocalNotification(
+                  id: notificationId,
+                  title: 'Test Local Notification',
+                  body: 'This is the body of the local notification!',
+                  payload: {'test': 'local_payload', 'id': notificationId},
+                );
+              },
+              child: const Text('Show Test Local Notification'),
+            ),
+            // --- End Test Button ---
           ],
         ),
       ),

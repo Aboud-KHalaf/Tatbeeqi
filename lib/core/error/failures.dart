@@ -5,16 +5,11 @@ import 'package:equatable/equatable.dart';
 abstract class Failure extends Equatable {
   // Pass properties to the Equatable superclass constructor
   // if you want failures to be distinguishable based on properties.
-  // Ex: final String message;
-  // const Failure([this.message = '']);
-  // @override
-  // List<Object> get props => [message];
-
-  // For simplicity here, we won't add properties differentiating failures
-  const Failure();
-
+   final String message;
+  const Failure([this.message = '']);
   @override
-  List<Object> get props => [];
+  List<Object> get props => [message];
+
 }
 
 /// Represents a failure related to caching operations (e.g., SharedPreferences).
@@ -33,6 +28,23 @@ class GeneralFailure extends Failure {
 
   const GeneralFailure({this.message = 'An unexpected error occurred'});
 
+  @override
+  List<Object> get props => [message];
+}
+
+//Notification
+/// Represents a failure related to notification permissions.
+class PermissionFailure extends Failure {
+  final String message;
+  const PermissionFailure({this.message = 'Permission denied or restricted'});
+  @override
+  List<Object> get props => [message];
+}
+
+/// Represents a failure during notification operations.
+class NotificationFailure extends Failure {
+  final String message;
+  const NotificationFailure({this.message = 'Failed notification operation'});
   @override
   List<Object> get props => [message];
 }

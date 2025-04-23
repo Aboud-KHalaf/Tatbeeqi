@@ -12,6 +12,8 @@ android {
     namespace = "com.example.tatbeeqi"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+    compileSdk = 35 // i added this line after notification features
+
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
