@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatbeeqi/core/usecases/usecase.dart';
-import 'package:tatbeeqi/features/localization/domain/usecases/get_locale_usecase.dart';
-import 'package:tatbeeqi/features/localization/domain/usecases/set_locale_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/domain/usecases/get_locale_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/domain/usecases/set_locale_usecase.dart';
 import '../../../../core/constants/constants.dart';
 import 'locale_state.dart'; // Adjust import path
 

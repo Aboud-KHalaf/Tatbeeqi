@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tatbeeqi/features/localization/domain/entites/notification_permission_status_entity.dart';
+import 'package:tatbeeqi/features/notifications/domain/domain/entites/notification_permission_status_entity.dart';
 import 'package:tatbeeqi/features/notifications/data/datasources/notification_data_source.dart'; // Use type alias
 
 abstract class NotificationState extends Equatable {

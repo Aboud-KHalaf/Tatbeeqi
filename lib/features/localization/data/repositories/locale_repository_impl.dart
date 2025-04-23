@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dartz/dartz.dart';
 import 'package:tatbeeqi/core/error/failures.dart';
 import 'package:tatbeeqi/features/localization/data/datasources/locale_local_data_source.dart';
-import 'package:tatbeeqi/features/localization/domain/repositories/locale_repository.dart';
+import 'package:tatbeeqi/features/notifications/domain/domain/repositories/locale_repository.dart';
 
 class LocaleRepositoryImpl implements LocaleRepository {
   final LocaleLocalDataSource localDataSource;

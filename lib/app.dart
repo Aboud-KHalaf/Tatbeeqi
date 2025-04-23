@@ -6,91 +6,68 @@ import 'package:tatbeeqi/features/localization/presentation/manager/locale_state
 // Import your generated AppLocalizations delegate
 // Make sure you have run `flutter gen-l10n`
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tatbeeqi/features/notifications/presentation/manager/notification_cubit/notification_cubit.dart'; // Adjust path if needed
+import 'package:tatbeeqi/features/navigation/presentation/screens/main_navigation_screen.dart'; // Import MainNavigationScreen
+import 'package:tatbeeqi/features/theme/presentation/manager/theme_cubit.dart'; // Import ThemeCubit if not already
+
+// Remove NotificationCubit import if not directly used here
+// import 'package:tatbeeqi/features/notifications/presentation/manager/notification_cubit/notification_cubit.dart';
 
 class AppView extends StatelessWidget {
   const AppView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Use BlocBuilder to rebuild MaterialApp when locale changes
+    // Use BlocBuilder for LocaleCubit
     return BlocBuilder<LocaleCubit, LocaleState>(
-      builder: (context, state) {
-        return MaterialApp(
-          // === Localization Setup ===
-          locale: state.locale, // Set locale from Cubit state
-          supportedLocales:
-              AppLocalizations.supportedLocales, // Locales your app supports
-          localizationsDelegates: const [
-            AppLocalizations.delegate, // Your generated delegate
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          // ==========================
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          home: const HomePage(), // Your initial screen
+      builder: (context, localeState) {
+        // Use BlocBuilder for ThemeCubit
+        return BlocBuilder<ThemeCubit, ThemeMode>(
+          // Add ThemeCubit builder
+          builder: (context, themeMode) {
+            return MaterialApp(
+              // === Localization Setup ===
+              locale: localeState.locale, // Set locale from Cubit state
+              supportedLocales: AppLocalizations
+                  .supportedLocales, // Locales your app supports
+              localizationsDelegates: const [
+                AppLocalizations.delegate, // Your generated delegate
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              // ==========================
+
+              // === Theme Setup ===
+              themeMode: themeMode, // Set theme mode from Cubit state
+              theme: ThemeData(
+                // Define your light theme
+                brightness: Brightness.light,
+                // Add other light theme properties
+              ),
+              darkTheme: ThemeData(
+                // Define your dark theme
+                brightness: Brightness.dark,
+                // Add other dark theme properties
+              ),
+              // ===================
+
+              debugShowCheckedModeBanner: false, // Optional: hide debug banner
+
+              // === Set Home Screen ===
+              home:
+                  const MainNavigationScreen(), // Use the main navigation screen
+              // =======================
+
+              // --- Optional: Routing ---
+              // If you have named routes, define them here
+              // routes: {
+              //   '/some_route': (context) => SomeScreen(),
+              // },
+              // -------------------------
+            );
+          },
         );
       },
-    );
-  }
-}
-
-// Example HomePage and Language Selector
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // Use localized string
-        title: Text(AppLocalizations.of(context)!.helloWorld),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              AppLocalizations.of(context)!.languagePrompt,
-            ),
-            const SizedBox(height: 20),
-            // Example buttons to change language
-            ElevatedButton(
-              onPressed: () {
-                context.read<LocaleCubit>().setLocale(const Locale('en'));
-              },
-              child: const Text('English'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.read<LocaleCubit>().setLocale(const Locale('ar'));
-              },
-              child: const Text('العربية'),
-            ),
-            const SizedBox(height: 20), // Add some space
-            // --- Add Test Button ---
-            ElevatedButton(
-              onPressed: () {
-                // Use a unique ID (e.g., timestamp or a counter)
-                final int notificationId =
-                    DateTime.now().millisecondsSinceEpoch % 100000;
-                context.read<NotificationCubit>().showLocalNotification(
-                  id: notificationId,
-                  title: 'Test Local Notification',
-                  body: 'This is the body of the local notification!',
-                  payload: {'test': 'local_payload', 'id': notificationId},
-                );
-              },
-              child: const Text('Show Test Local Notification'),
-            ),
-            // --- End Test Button ---
-          ],
-        ),
-      ),
     );
   }
 }

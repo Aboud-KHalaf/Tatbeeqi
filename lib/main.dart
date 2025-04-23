@@ -5,9 +5,9 @@ import 'package:tatbeeqi/app.dart';
 // Updated import:
 import 'package:tatbeeqi/core/di/service_locator.dart' as di; // Use alias
 import 'package:tatbeeqi/features/localization/presentation/manager/locale_cubit.dart'; // Ensure correct path
-import 'package:tatbeeqi/features/notifications/presentation/manager/notification_cubit.dart'; // Import Notification Cubit
+import 'package:tatbeeqi/features/notifications/presentation/manager/notification_cubit/notification_cubit.dart'; // Import Notification Cubit
 import 'package:tatbeeqi/features/theme/presentation/manager/theme_cubit.dart'; // Import Theme Cubit
-// Import your generated AppLocalizations delegate if needed here
+import 'package:tatbeeqi/features/navigation/presentation/manager/navigation_cubit/navigation_cubit.dart'; // Import Navigation Cubit
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'firebase_options.dart'; // Import generated Firebase options
 
@@ -39,12 +39,17 @@ class MyApp extends StatelessWidget {
           create: (_) => di.sl<LocaleCubit>()..getSavedLocale(),
         ),
         BlocProvider(
-          create: (_) => di.sl<ThemeCubit>()..loadThemeMode(), // Assuming ThemeCubit has loadThemeMode
+          create: (_) => di.sl<ThemeCubit>()
+            ..loadThemeMode(), // Assuming ThemeCubit has loadThemeMode
         ),
         BlocProvider(
           // Create NotificationCubit and initialize notifications
           create: (_) => di.sl<NotificationCubit>()..initializeNotifications(),
           lazy: false, // Initialize immediately
+        ),
+        BlocProvider(
+          // Add Navigation Cubit Provider
+          create: (_) => di.sl<NavigationCubit>(),
         ),
         // Add other global providers here
       ],

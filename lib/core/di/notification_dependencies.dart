@@ -8,7 +8,7 @@ import 'package:tatbeeqi/features/notifications/domain/usecases/request_notifica
 import 'package:tatbeeqi/features/notifications/domain/usecases/show_local_notification.dart';
 import 'package:tatbeeqi/features/notifications/domain/usecases/subscribe_to_topic.dart';
 import 'package:tatbeeqi/features/notifications/domain/usecases/unsubscribe_from_topic.dart';
-import 'package:tatbeeqi/features/notifications/presentation/manager/notification_cubit.dart';
+import 'package:tatbeeqi/features/notifications/presentation/manager/notification_cubit/notification_cubit.dart';
 
 void initNotificationDependencies(GetIt sl) {
   // --- Notifications Feature ---

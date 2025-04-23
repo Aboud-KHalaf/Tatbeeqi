@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatbeeqi/core/di/service_locator.dart';
 import 'package:tatbeeqi/core/usecases/usecase.dart';
-import 'package:tatbeeqi/features/localization/domain/entites/notification_permission_status_entity.dart';
+import 'package:tatbeeqi/features/notifications/domain/domain/entites/notification_permission_status_entity.dart';
 import 'package:tatbeeqi/features/notifications/data/datasources/notification_data_source.dart';
 import 'package:tatbeeqi/features/notifications/domain/repositories/notification_repository.dart';
 import 'package:tatbeeqi/features/notifications/domain/usecases/initialize_notifications.dart';
@@ -74,7 +74,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     });
   }
 
-  // --- Add temporary method ---
+  // ---  temporary method ---
   Future<void> _getAndPrintFcmToken() async {
     // This is a simplified way for testing. Ideally, you'd have a dedicated use case.
     final tokenResult = await sl<NotificationRepository>()
@@ -83,17 +83,13 @@ class NotificationCubit extends Cubit<NotificationState> {
       (failure) => print("Error getting FCM token: ${failure.message}"),
       (token) {
         if (token != null) {
-          print("========================================");
           print("FCM TOKEN: $token");
-          print("========================================");
-          // You might want to display this in the UI or copy it easily
         } else {
           print("FCM Token is null.");
         }
       },
     );
   }
-  // --- End temporary method ---
 
   Future<void> requestPermission() async {
     emit(NotificationLoading(permissionStatus: state.permissionStatus));
@@ -134,7 +130,6 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   // Remember to cancel the stream subscription when the Cubit is closed
-  // --- Add Topic Methods ---
   Future<void> subscribeToTopic(String topic) async {
     emit(NotificationLoading(permissionStatus: state.permissionStatus));
     final result = await subscribeToTopicUseCase(topic);
