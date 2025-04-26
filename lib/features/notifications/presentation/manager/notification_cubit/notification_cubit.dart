@@ -2,15 +2,17 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatbeeqi/core/di/service_locator.dart';
 import 'package:tatbeeqi/core/usecases/usecase.dart';
-import 'package:tatbeeqi/features/notifications/domain/domain/entites/notification_permission_status_entity.dart';
+import 'package:tatbeeqi/core/utils/app_logger.dart';
+import 'package:tatbeeqi/features/notifications/domain/entites/notification_permission_status_entity.dart';
 import 'package:tatbeeqi/features/notifications/data/datasources/notification_data_source.dart';
+import 'package:tatbeeqi/features/notifications/domain/entites/show_local_notification_params_entity.dart';
 import 'package:tatbeeqi/features/notifications/domain/repositories/notification_repository.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/initialize_notifications.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/request_notification_permission.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/show_local_notification.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/handle_notification_interaction.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/subscribe_to_topic.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/unsubscribe_from_topic.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/initialize_notifications_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/request_notification_permission_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/show_local_notification_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/handle_notification_interaction_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/subscribe_to_topic_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/unsubscribe_from_topic_usecase.dart';
 import 'notification_state.dart';
 
 class NotificationCubit extends Cubit<NotificationState> {
@@ -48,10 +50,10 @@ class NotificationCubit extends Cubit<NotificationState> {
       ));
       // You might want to navigate or perform other actions based on the payload here
       // or let the UI layer observe this state change.
-      print("Cubit received interaction: $payload");
+      AppLogger.info("Cubit received interaction: $payload");
     }, onError: (error) {
       // Handle stream errors if necessary
-      print("Error in notification interaction stream: $error");
+      AppLogger.error("Error in notification interaction stream: $error");
       emit(NotificationError(
           permissionStatus: state.permissionStatus,
           message: "Error receiving notification interaction: $error"));
@@ -65,12 +67,10 @@ class NotificationCubit extends Cubit<NotificationState> {
         (failure) => emit(NotificationError(
             permissionStatus: state.permissionStatus, // Keep previous status
             message: failure.message)), (_) {
-      print("Notification system initialized successfully.");
+      AppLogger.info("Notification system initialized successfully.");
       // --- Add temporary token retrieval ---
       _getAndPrintFcmToken();
       // --- End temporary token retrieval ---
-      // Optionally check permission status after initialization
-      // checkInitialPermissionStatus(); // Implement this if needed
     });
   }
 
@@ -80,12 +80,13 @@ class NotificationCubit extends Cubit<NotificationState> {
     final tokenResult = await sl<NotificationRepository>()
         .getFcmToken(); // Using service locator directly for brevity
     tokenResult.fold(
-      (failure) => print("Error getting FCM token: ${failure.message}"),
+      (failure) =>
+          AppLogger.error("Error getting FCM token: ${failure.message}"),
       (token) {
         if (token != null) {
-          print("FCM TOKEN: $token");
+          AppLogger.info("FCM TOKEN: $token");
         } else {
-          print("FCM Token is null.");
+          AppLogger.warning("FCM Token is null.");
         }
       },
     );
@@ -97,16 +98,16 @@ class NotificationCubit extends Cubit<NotificationState> {
     result.fold(
       (failure) {
         emit(const NotificationPermissionChecked(
-            permissionStatus: NotificationPermissionStatus.denied));
+            permissionStatus: NotificationPermissionStatusEntity.denied));
         // Optionally emit error state as well or instead
         emit(NotificationError(
-            permissionStatus: NotificationPermissionStatus.denied,
+            permissionStatus: NotificationPermissionStatusEntity.denied,
             message: failure.message));
       },
       (granted) => emit(NotificationPermissionChecked(
           permissionStatus: granted
-              ? NotificationPermissionStatus.granted
-              : NotificationPermissionStatus.denied)),
+              ? NotificationPermissionStatusEntity.granted
+              : NotificationPermissionStatusEntity.denied)),
     );
   }
 
@@ -117,7 +118,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     NotificationPayload? payload,
   }) async {
     emit(NotificationLoading(permissionStatus: state.permissionStatus));
-    final params = ShowLocalNotificationParams(
+    final params = ShowLocalNotificationParamsEntity(
         id: id, title: title, body: body, payload: payload);
     final result = await showLocalNotificationUseCase(params);
     result.fold(

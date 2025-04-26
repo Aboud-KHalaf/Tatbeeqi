@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatbeeqi/app.dart';
 // Updated import:
 import 'package:tatbeeqi/core/di/service_locator.dart' as di; // Use alias
-import 'package:tatbeeqi/features/localization/presentation/manager/locale_cubit.dart'; // Ensure correct path
+import 'package:tatbeeqi/features/localization/presentation/manager/locale_cubit/locale_cubit.dart'; // Ensure correct path
 import 'package:tatbeeqi/features/notifications/presentation/manager/notification_cubit/notification_cubit.dart'; // Import Notification Cubit
-import 'package:tatbeeqi/features/theme/presentation/manager/theme_cubit.dart'; // Import Theme Cubit
 import 'package:tatbeeqi/features/navigation/presentation/manager/navigation_cubit/navigation_cubit.dart'; // Import Navigation Cubit
+import 'package:tatbeeqi/features/theme/presentation/manager/theme_cubit/theme_cubit.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'firebase_options.dart'; // Import generated Firebase options
 
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.sl<ThemeCubit>()
-            ..loadThemeMode(), // Assuming ThemeCubit has loadThemeMode
+            ..loadTheme(), // Changed from loadThemeMode to loadTheme
         ),
         BlocProvider(
           // Create NotificationCubit and initialize notifications

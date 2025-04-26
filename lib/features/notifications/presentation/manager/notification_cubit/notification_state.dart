@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:tatbeeqi/features/notifications/domain/domain/entites/notification_permission_status_entity.dart';
+import 'package:tatbeeqi/features/notifications/domain/entites/notification_permission_status_entity.dart';
 import 'package:tatbeeqi/features/notifications/data/datasources/notification_data_source.dart'; // Use type alias
 
 abstract class NotificationState extends Equatable {
-  final NotificationPermissionStatus permissionStatus;
+  final NotificationPermissionStatusEntity permissionStatus;
   final String? errorMessage;
 
   const NotificationState({
@@ -17,7 +17,7 @@ abstract class NotificationState extends Equatable {
 
 class NotificationInitial extends NotificationState {
   const NotificationInitial()
-      : super(permissionStatus: NotificationPermissionStatus.initial);
+      : super(permissionStatus: NotificationPermissionStatusEntity.initial);
 }
 
 class NotificationLoading extends NotificationState {

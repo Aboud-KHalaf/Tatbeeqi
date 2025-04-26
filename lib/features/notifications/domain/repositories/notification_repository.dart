@@ -10,7 +10,6 @@ abstract class NotificationRepository {
   /// Returns true if granted, Failure otherwise.
   Future<Either<Failure, bool>> requestPermission();
 
-  /// Displays a local notification.
   Future<Either<Failure, Unit>> showLocalNotification({
     required int id,
     required String title,
@@ -18,15 +17,14 @@ abstract class NotificationRepository {
     NotificationPayload? payload,
   });
 
-   /// Gets the FCM registration token.
   Future<Either<Failure, String?>> getFcmToken();
 
   /// Stream that emits payloads when a notification is interacted with (tapped).
   Stream<NotificationPayload> get notificationInteractionStream;
 
-  /// Subscribes the device to an FCM topic.
+  /// Subscribes the (device) to an FCM topic.
   Future<Either<Failure, Unit>> subscribeToTopic(String topic);
 
-  /// Unsubscribes the device from an FCM topic.
+  /// Unsubscribes the (device) from an FCM topic.
   Future<Either<Failure, Unit>> unsubscribeFromTopic(String topic);
 }

@@ -6,12 +6,11 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:tatbeeqi/core/constants/constants.dart';
 import 'package:tatbeeqi/core/constants/notifications_constants.dart';
 import 'package:tatbeeqi/core/error/exceptions.dart';
+import 'package:tatbeeqi/core/utils/app_logger.dart';
 
 // Define callback types for handling interactions
 typedef NotificationTapCallback = void Function(Map<String, dynamic> payload);
 typedef BackgroundMessageHandler = Future<void> Function(RemoteMessage message);
-
-// --- Constants for Local Notifications ---
 
 abstract class NotificationService {
   /// Initializes both FCM and Local Notifications.
@@ -73,22 +72,24 @@ class NotificationServiceImpl implements NotificationService {
       await _requestPermissionsAndSubscribeToDefaultTopic(); // Request permission and subscribe
     } catch (e, s) {
       // Catch specific exceptions if needed, otherwise log and rethrow a generic one
-      print('Error initializing notifications: $e\n$s');
+      AppLogger.error(
+          'notification services: Error initializing notifications: $e\n$s');
       throw NotificationException(
           message: 'Notification initialization failed: ${e.toString()}');
     }
   }
 
   Future<void> _initializeLocalNotifications() async {
+    //for Android
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings(AppConstants.androidAppIcon);
-
+    // for IOS
     const DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
-      // onDidReceiveLocalNotification: _onDidReceiveLocalNotification, // Deprecated
+      //onDidReceiveLocalNotification: _onDidReceiveLocalNotification, // Deprecated
     );
 
     const InitializationSettings initializationSettings =
@@ -119,7 +120,8 @@ class NotificationServiceImpl implements NotificationService {
     RemoteMessage? initialMessage =
         await _firebaseMessaging.getInitialMessage();
     if (initialMessage != null) {
-      print('Opened from terminated state via message: ${initialMessage.data}');
+      AppLogger.info(
+          'Opened from terminated state via message: ${initialMessage.data}');
       // Use a slight delay to ensure the app navigation context is ready
       Future.delayed(const Duration(milliseconds: 500), () {
         _handleInteraction(initialMessage.data);
@@ -128,7 +130,7 @@ class NotificationServiceImpl implements NotificationService {
 
     // Handle notification tap when app is opened from background state
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('Opened from background via message: ${message.data}');
+      AppLogger.info('Opened from background via message: ${message.data}');
       _handleInteraction(message.data);
     });
   }
@@ -138,7 +140,7 @@ class NotificationServiceImpl implements NotificationService {
     if (_onTapCallback != null) {
       _notificationTapController.stream.listen(_onTapCallback);
     } else {
-      print(
+      AppLogger.warning(
           "Warning: NotificationService initialized without an onTap callback.");
     }
   }
@@ -150,14 +152,15 @@ class NotificationServiceImpl implements NotificationService {
       // Subscribe to the default topic if permission is granted
       try {
         await subscribeToTopic(AppConstants.allUsersSubscribeToTopic);
-        print(
+        AppLogger.info(
             'Automatically subscribed to default topic: ${AppConstants.allUsersSubscribeToTopic}');
       } catch (e) {
-        print('Failed to auto-subscribe to default topic: $e');
+        AppLogger.error('Failed to auto-subscribe to default topic: $e');
         // Decide if this failure should throw or just be logged
       }
     } else {
-      print('Permission not granted, skipping default topic subscription.');
+      AppLogger.warning(
+          'Permission not granted, skipping default topic subscription.');
     }
   }
 
@@ -182,15 +185,15 @@ class NotificationServiceImpl implements NotificationService {
               settings.authorizationStatus == AuthorizationStatus.provisional;
 
       if (granted) {
-        print(
+        AppLogger.info(
             'Notification permission granted (Status: ${settings.authorizationStatus}).');
       } else {
-        print(
+        AppLogger.info(
             'Notification permission denied (Status: ${settings.authorizationStatus}).');
       }
       return granted;
     } catch (e, s) {
-      print('Error requesting notification permissions: $e\n$s');
+      AppLogger.error('Error requesting notification permissions: $e\n$s');
       // Throw a specific permission exception
       throw PermissionException(
           message: 'Failed to request permission: ${e.toString()}');
@@ -243,7 +246,7 @@ class NotificationServiceImpl implements NotificationService {
         payload: payloadString,
       );
     } catch (e, s) {
-      print('Error showing local notification: $e\n$s');
+      AppLogger.error('Error showing local notification: $e\n$s');
       throw NotificationException(
           message: 'Failed to show notification: ${e.toString()}');
     }
@@ -265,11 +268,10 @@ class NotificationServiceImpl implements NotificationService {
       );
       try {
         await androidImplementation.createNotificationChannel(channel);
-        print(
+        AppLogger.info(
             "Android Notification Channel '${NotificationsConstants.localNotificationChannelId}' created or already exists.");
       } catch (e, s) {
-        print("Error creating Android Notification Channel: $e\n$s");
-        // Decide if this should throw an exception or just log
+        AppLogger.info("Error creating Android Notification Channel: $e\n$s");
       }
     }
   }
@@ -280,10 +282,10 @@ class NotificationServiceImpl implements NotificationService {
   Future<String?> getFcmToken() async {
     try {
       String? token = await _firebaseMessaging.getToken();
-      print("FCM Token: $token");
+      AppLogger.debug("FCM Token: $token");
       return token;
     } catch (e, s) {
-      print('Error getting FCM token: $e\n$s');
+      AppLogger.error('Error getting FCM token: $e\n$s');
       // Usually, don't throw here, let the caller handle null token
       return null;
     }
@@ -295,9 +297,9 @@ class NotificationServiceImpl implements NotificationService {
   Future<void> subscribeToTopic(String topic) async {
     try {
       await _firebaseMessaging.subscribeToTopic(topic);
-      print('Subscribed to topic: $topic');
+      AppLogger.info('Subscribed to topic: $topic');
     } catch (e, s) {
-      print('Error subscribing to topic $topic: $e\n$s');
+      AppLogger.error('Error subscribing to topic $topic: $e\n$s');
       throw NotificationException(
           message: 'Failed to subscribe to topic $topic: ${e.toString()}');
     }
@@ -307,9 +309,9 @@ class NotificationServiceImpl implements NotificationService {
   Future<void> unsubscribeFromTopic(String topic) async {
     try {
       await _firebaseMessaging.unsubscribeFromTopic(topic);
-      print('Unsubscribed from topic: $topic');
+      AppLogger.info('Unsubscribed from topic: $topic');
     } catch (e, s) {
-      print('Error unsubscribing from topic $topic: $e\n$s');
+      AppLogger.error('Error unsubscribing from topic $topic: $e\n$s');
       throw NotificationException(
           message: 'Failed to unsubscribe from topic $topic: ${e.toString()}');
     }
@@ -319,7 +321,8 @@ class NotificationServiceImpl implements NotificationService {
 
   // Handles FCM messages received while the app is in the foreground.
   Future<void> _handleForegroundMessage(RemoteMessage message) async {
-    print('Foreground Message received: ${message.notification?.title}');
+    AppLogger.info(
+        'Foreground Message received: ${message.notification?.title}');
     RemoteNotification? notification = message.notification;
 
     // Display the FCM notification locally if it has content
@@ -337,7 +340,8 @@ class NotificationServiceImpl implements NotificationService {
   // Handler for when user taps a *local* notification (foreground/background)
   void _onDidReceiveLocalNotificationResponse(
       NotificationResponse response) async {
-    print('Local notification tapped with payload string: ${response.payload}');
+    AppLogger.info(
+        'Local notification tapped with payload string: ${response.payload}');
     _handleInteractionFromString(response.payload);
   }
 
@@ -349,7 +353,7 @@ class NotificationServiceImpl implements NotificationService {
     // Avoid heavy logic, instance members, or complex DI.
     // Best practice: Store the payload (e.g., in SharedPreferences)
     // and process it when the main app isolate starts.
-    print('Background local notification tapped: ${response.payload}');
+    AppLogger.info('Background local notification tapped: ${response.payload}');
     // Example: You might try to decode and store it simply
     // Map<String, dynamic> payload = {};
     // if (response.payload != null) {
@@ -360,11 +364,12 @@ class NotificationServiceImpl implements NotificationService {
 
   // Central interaction handler - takes Map payload
   void _handleInteraction(Map<String, dynamic> payload) {
-    print("Handling interaction with payload map: $payload");
+    AppLogger.info("Handling interaction with payload map: $payload");
     if (!_notificationTapController.isClosed) {
       _notificationTapController.add(payload);
     } else {
-      print("Warning: Interaction received but tap controller is closed.");
+      AppLogger.warning(
+          "Warning: Interaction received but tap controller is closed.");
     }
   }
 
@@ -378,19 +383,20 @@ class NotificationServiceImpl implements NotificationService {
         if (decoded is Map<String, dynamic>) {
           payload = decoded;
         } else {
-          print(
+          AppLogger.info(
               "Decoded payload is not a Map<String, dynamic>. Type: ${decoded.runtimeType}");
           // Fallback: wrap the raw string in a map if decoding fails or type is wrong
           payload = {'payload_string': payloadString};
         }
       } catch (e) {
-        print(
+        AppLogger.error(
             "Error decoding notification payload string: $e. Treating as raw string.");
         // Fallback: wrap the raw string in a map if decoding fails
         payload = {'payload_string': payloadString};
       }
     } else {
-      print("Interaction received with null or empty payload string.");
+      AppLogger.warning(
+          "Interaction received with null or empty payload string.");
     }
     _handleInteraction(
         payload); // Call the central handler with the processed payload

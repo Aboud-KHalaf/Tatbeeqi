@@ -1,4 +1,4 @@
-import 'package:tatbeeqi/core/services/notification_service.dart'; // Import the service
+import 'package:tatbeeqi/core/services/notification_service.dart';
 
 typedef NotificationPayload = Map<String, dynamic>;
 

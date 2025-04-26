@@ -5,6 +5,7 @@ import 'package:tatbeeqi/features/navigation/presentation/manager/navigation_cub
 import 'package:tatbeeqi/features/navigation/presentation/widgets/bottom_nav_bar.dart';
 import 'package:tatbeeqi/features/home/presentation/screens/home_screen.dart';
 import 'package:tatbeeqi/features/settings/presentation/screens/settings_screen.dart';
+import 'package:tatbeeqi/features/theme/presentation/widgets/theme_toggle_widget.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -43,6 +44,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         _pageController.jumpToPage(state.index);
       },
       child: Scaffold(
+        appBar: AppBar(
+          title: const ThemeToggleWidget(),
+        ),
         body: PageView(
           controller: _pageController,
           onPageChanged: (index) =>

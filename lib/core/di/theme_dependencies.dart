@@ -4,27 +4,28 @@ import 'package:tatbeeqi/features/theme/data/repositories/theme_repository_impl.
 import 'package:tatbeeqi/features/theme/domain/repositories/theme_repository.dart';
 import 'package:tatbeeqi/features/theme/domain/usecases/get_theme_mode_usecase.dart';
 import 'package:tatbeeqi/features/theme/domain/usecases/set_theme_mode_usecase.dart';
-import 'package:tatbeeqi/features/theme/presentation/manager/theme_cubit.dart';
+import 'package:tatbeeqi/features/theme/presentation/manager/theme_cubit/theme_cubit.dart';
 
 void initThemeDependencies(GetIt sl) {
-  // --- Theme Feature ---
-  // Manager (Cubit)
+  // Cubit
   sl.registerFactory(
     () => ThemeCubit(
-      getThemeModeUseCase: sl<GetThemeModeUseCase>(),
-      setThemeModeUseCase: sl<SetThemeModeUseCase>(),
+      getThemeModeUseCase: sl(),
+      setThemeModeUseCase: sl(),
     ),
   );
 
-  // Use Cases
+  // UseCases
   sl.registerLazySingleton(() => GetThemeModeUseCase(sl()));
   sl.registerLazySingleton(() => SetThemeModeUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<ThemeRepository>(
-      () => ThemeRepositoryImpl(localDataSource: sl()));
+    () => ThemeRepositoryImpl(localDataSource: sl()),
+  );
 
-  // Data Source
+  // DataSources
   sl.registerLazySingleton<ThemeLocalDataSource>(
-      () => ThemeLocalDataSourceImpl(sharedPreferences: sl()));
+    () => ThemeLocalDataSourceImpl(sharedPreferences: sl()),
+  );
 }

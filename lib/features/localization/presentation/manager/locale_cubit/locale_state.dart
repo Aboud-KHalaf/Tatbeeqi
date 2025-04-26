@@ -10,7 +10,6 @@ abstract class LocaleState extends Equatable {
 }
 
 class LocaleInitial extends LocaleState {
-  // Start with a default locale before loading the saved one
   const LocaleInitial() : super(const Locale('ar'));
 }
 
@@ -20,7 +19,6 @@ class LocaleLoaded extends LocaleState {
 
 class LocaleError extends LocaleState {
   final String message;
-  // Keep the last known locale or a default one even in error state
   const LocaleError(super.locale, this.message);
 
   @override

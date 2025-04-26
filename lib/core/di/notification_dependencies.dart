@@ -2,12 +2,12 @@ import 'package:get_it/get_it.dart';
 import 'package:tatbeeqi/features/notifications/data/datasources/notification_data_source.dart';
 import 'package:tatbeeqi/features/notifications/data/repositories/notification_repository_impl.dart';
 import 'package:tatbeeqi/features/notifications/domain/repositories/notification_repository.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/handle_notification_interaction.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/initialize_notifications.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/request_notification_permission.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/show_local_notification.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/subscribe_to_topic.dart';
-import 'package:tatbeeqi/features/notifications/domain/usecases/unsubscribe_from_topic.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/handle_notification_interaction_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/initialize_notifications_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/request_notification_permission_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/show_local_notification_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/subscribe_to_topic_usecase.dart';
+import 'package:tatbeeqi/features/notifications/domain/usecases/unsubscribe_from_topic_usecase.dart';
 import 'package:tatbeeqi/features/notifications/presentation/manager/notification_cubit/notification_cubit.dart';
 
 void initNotificationDependencies(GetIt sl) {

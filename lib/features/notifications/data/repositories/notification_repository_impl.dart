@@ -22,23 +22,20 @@ class NotificationRepositoryImpl implements NotificationRepository {
   @override
   Future<Either<Failure, Unit>> initialize() async {
     try {
-      // Pass the handler that forwards events to our stream
       await dataSource.initializeNotifications(_onInteraction);
       return const Right(unit);
     } on NotificationException catch (e) {
-      return Left(NotificationFailure(message: e.message));
+      return Left(NotificationFailure(e.message));
     } on PermissionException catch (e) {
-      return Left(PermissionFailure(
-          message: e.message)); // Can happen during init sometimes
+      return Left(PermissionFailure(e.message));
     } catch (e) {
       return Left(GeneralFailure(
-          message: 'Failed to initialize notifications: ${e.toString()}'));
+          'Failed to initialize notifications: ${e.toString()}'));
     }
   }
 
-  // Callback function passed to the data source
   void _onInteraction(NotificationPayload payload) {
-    _interactionController.add(payload); // Add payload to the stream
+    _interactionController.add(payload);
   }
 
   @override
@@ -48,15 +45,14 @@ class NotificationRepositoryImpl implements NotificationRepository {
       if (granted) {
         return const Right(true);
       } else {
-        // Convert false result to a specific Failure
         return const Left(
-            PermissionFailure(message: 'User denied notification permission'));
+            PermissionFailure('User denied notification permission'));
       }
     } on PermissionException catch (e) {
-      return Left(PermissionFailure(message: e.message));
+      return Left(PermissionFailure(e.message));
     } catch (e) {
-      return Left(GeneralFailure(
-          message: 'Failed to request permission: ${e.toString()}'));
+      return Left(
+          GeneralFailure('Failed to request permission: ${e.toString()}'));
     }
   }
 
@@ -76,10 +72,10 @@ class NotificationRepositoryImpl implements NotificationRepository {
       );
       return const Right(unit);
     } on NotificationException catch (e) {
-      return Left(NotificationFailure(message: e.message));
+      return Left(NotificationFailure(e.message));
     } catch (e) {
-      return Left(GeneralFailure(
-          message: 'Failed to show notification: ${e.toString()}'));
+      return Left(
+          GeneralFailure('Failed to show notification: ${e.toString()}'));
     }
   }
 
@@ -89,9 +85,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
       final token = await dataSource.getFcmToken();
       return Right(token);
     } catch (e) {
-      // Decide if token failure is critical
-      return Left(
-          GeneralFailure(message: 'Failed to get FCM token: ${e.toString()}'));
+      return Left(GeneralFailure('Failed to get FCM token: ${e.toString()}'));
     }
   }
 
@@ -101,9 +95,10 @@ class NotificationRepositoryImpl implements NotificationRepository {
       await dataSource.subscribeToTopic(topic);
       return const Right(unit);
     } on NotificationException catch (e) {
-      return Left(NotificationFailure(message: e.message));
+      return Left(NotificationFailure(e.message));
     } catch (e) {
-      return Left(GeneralFailure(message: 'Failed to subscribe to topic $topic: ${e.toString()}'));
+      return Left(GeneralFailure(
+          'Failed to subscribe to topic $topic: ${e.toString()}'));
     }
   }
 
@@ -113,9 +108,10 @@ class NotificationRepositoryImpl implements NotificationRepository {
       await dataSource.unsubscribeFromTopic(topic);
       return const Right(unit);
     } on NotificationException catch (e) {
-      return Left(NotificationFailure(message: e.message));
+      return Left(NotificationFailure(e.message));
     } catch (e) {
-      return Left(GeneralFailure(message: 'Failed to unsubscribe from topic $topic: ${e.toString()}'));
+      return Left(GeneralFailure(
+          'Failed to unsubscribe from topic $topic: ${e.toString()}'));
     }
   }
 

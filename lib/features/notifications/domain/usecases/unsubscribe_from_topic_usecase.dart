@@ -11,7 +11,7 @@ class UnsubscribeFromTopicUseCase implements UseCase<Unit, String> {
   @override
   Future<Either<Failure, Unit>> call(String topic) async {
     if (topic.isEmpty) {
-      return const Left(GeneralFailure(message: 'Topic cannot be empty'));
+      return const Left(GeneralFailure('Topic cannot be empty'));
     }
     return await repository.unsubscribeFromTopic(topic);
   }

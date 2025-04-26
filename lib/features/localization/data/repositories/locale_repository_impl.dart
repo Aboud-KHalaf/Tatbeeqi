@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dartz/dartz.dart';
 import 'package:tatbeeqi/core/error/failures.dart';
 import 'package:tatbeeqi/features/localization/data/datasources/locale_local_data_source.dart';
-import 'package:tatbeeqi/features/notifications/domain/domain/repositories/locale_repository.dart';
+import 'package:tatbeeqi/features/localization/domain/repositories/locale_repository.dart';
 
 class LocaleRepositoryImpl implements LocaleRepository {
   final LocaleLocalDataSource localDataSource;
@@ -19,11 +19,9 @@ class LocaleRepositoryImpl implements LocaleRepository {
   Future<Either<Failure, Unit>> saveLocale(Locale locale) async {
     try {
       await localDataSource.cacheLocaleCode(locale.languageCode);
-      return const Right(unit); // unit signifies success with no data
+      return const Right(unit);
     } on Exception catch (e) {
-      // Catch potential SharedPreferences errors
-      return Left(
-          CacheFailure(message: 'Failed to save locale: ${e.toString()}'));
+      return Left(CacheFailure('Failed to save locale: ${e.toString()}'));
     }
   }
 }

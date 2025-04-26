@@ -3,10 +3,8 @@ import 'package:tatbeeqi/core/constants/shared_preferences_keys_constants.dart';
 import '../../../../core/constants/constants.dart';
 
 abstract class LocaleLocalDataSource {
-  /// Gets the cached locale code (e.g., 'en', 'ar') from local storage.
   Future<String> getLastLocaleCode();
 
-  /// Caches the given locale code (e.g., 'en', 'ar') to local storage.
   Future<void> cacheLocaleCode(String localeCode);
 }
 
