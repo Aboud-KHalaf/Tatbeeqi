@@ -26,10 +26,10 @@ class ThemeLocalDataSourceImpl implements ThemeLocalDataSource {
         );
         return Future.value(mode);
       } catch (_) {
-        throw CacheException(message: 'Failed to parse stored theme mode');
+        throw CacheException('Failed to parse stored theme mode');
       }
     } else {
-      throw CacheException(message: 'No theme mode found in cache');
+      throw CacheException('No theme mode found in cache');
     }
   }
 
@@ -38,9 +38,9 @@ class ThemeLocalDataSourceImpl implements ThemeLocalDataSource {
     final success = await sharedPreferences.setString(
       SharedPreferencesKeysConstants.themeKey,
       modeToCache.toString(),
-    );
+    );  
     if (!success) {
-      throw CacheException(message: 'Failed to save theme mode to cache');
+      throw CacheException('Failed to save theme mode to cache');
     }
   }
 }

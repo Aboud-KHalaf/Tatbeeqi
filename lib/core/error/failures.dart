@@ -1,38 +1,38 @@
 import 'package:equatable/equatable.dart';
 
-/// Base Failure class. All specific failures should extend this.
-/// I am using Equatable for easier value comparison in tests.
+// Base Failure class
 abstract class Failure extends Equatable {
-  // Pass properties to the Equatable superclass constructor
-  // if you want failures to be distinguishable based on properties.
   final String message;
-  const Failure([this.message = '']);
+
+  const Failure(this.message);
+
   @override
-  List<Object> get props => [message];
+  List<Object?> get props => [message];
+
+  @override
+  String toString() => message;
 }
 
-/// Represents a failure related to caching operations (e.g., SharedPreferences).
+// General failures
+class ServerFailure extends Failure {
+  const ServerFailure(super.message);
+}
+
 class CacheFailure extends Failure {
-  const CacheFailure([super.message = 'Failed to access cache']);
+  const CacheFailure(super.message);
 }
 
-/// Represents a generic failure (can be used as a fallback).
-class GeneralFailure extends Failure {
-  const GeneralFailure([super.message = 'An unexpected error occurred']);
-}
-
-//Notification
-/// Represents a failure related to notification permissions.
 class PermissionFailure extends Failure {
-  const PermissionFailure([super.message = 'Permission denied or restricted']);
+  const PermissionFailure(super.message);
 }
 
-/// Represents a failure during notification operations.
 class NotificationFailure extends Failure {
-  const NotificationFailure([super.message = 'Failed notification operation']);
+  const NotificationFailure(super.message);
 }
 
+class GeneralFailure extends Failure {
+  const GeneralFailure(super.message);
+}
 
-//  other specific failures corresponding to exceptions
-// class ServerFailure extends Failure {}
+// Add other specific failures corresponding to exceptions if needed
 // class NetworkFailure extends Failure {}

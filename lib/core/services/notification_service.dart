@@ -75,7 +75,7 @@ class NotificationServiceImpl implements NotificationService {
       AppLogger.error(
           'notification services: Error initializing notifications: $e\n$s');
       throw NotificationException(
-          message: 'Notification initialization failed: ${e.toString()}');
+          'Notification initialization failed: ${e.toString()}');
     }
   }
 
@@ -196,7 +196,7 @@ class NotificationServiceImpl implements NotificationService {
       AppLogger.error('Error requesting notification permissions: $e\n$s');
       // Throw a specific permission exception
       throw PermissionException(
-          message: 'Failed to request permission: ${e.toString()}');
+          'Failed to request permission: ${e.toString()}');
     }
   }
 
@@ -248,7 +248,7 @@ class NotificationServiceImpl implements NotificationService {
     } catch (e, s) {
       AppLogger.error('Error showing local notification: $e\n$s');
       throw NotificationException(
-          message: 'Failed to show notification: ${e.toString()}');
+          'Failed to show notification: ${e.toString()}');
     }
   }
 
@@ -301,7 +301,7 @@ class NotificationServiceImpl implements NotificationService {
     } catch (e, s) {
       AppLogger.error('Error subscribing to topic $topic: $e\n$s');
       throw NotificationException(
-          message: 'Failed to subscribe to topic $topic: ${e.toString()}');
+          'Failed to subscribe to topic $topic: ${e.toString()}');
     }
   }
 
@@ -313,7 +313,7 @@ class NotificationServiceImpl implements NotificationService {
     } catch (e, s) {
       AppLogger.error('Error unsubscribing from topic $topic: $e\n$s');
       throw NotificationException(
-          message: 'Failed to unsubscribe from topic $topic: ${e.toString()}');
+          'Failed to unsubscribe from topic $topic: ${e.toString()}');
     }
   }
 

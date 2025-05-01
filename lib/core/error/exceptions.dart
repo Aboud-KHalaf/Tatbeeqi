@@ -1,30 +1,47 @@
-/// Exception thrown when a cache-related error occurs.
+// Represents errors during data fetching or processing (e.g., from APIs, databases)
+
+class ServerException implements Exception {
+  final String message;
+
+  ServerException(this.message);
+
+  @override
+  String toString() {
+    return message;
+  }
+}
+
 class CacheException implements Exception {
   final String message;
 
-  CacheException({this.message = 'Error accessing cache'});
+  CacheException(this.message);
 
   @override
-  String toString() => 'CacheException: $message';
+  String toString() {
+    return message;
+  }
 }
 
-/// Exception thrown when notification permissions are denied or restricted.
 class PermissionException implements Exception {
   final String message;
-  PermissionException({this.message = 'Notification permission denied'});
+
+  PermissionException(this.message);
+
   @override
-  String toString() => 'PermissionException: $message';
+  String toString() {
+    return message;
+  }
 }
 
-/// Exception thrown during notification operations (showing, handling).
 class NotificationException implements Exception {
   final String message;
-  NotificationException({this.message = 'Notification operation failed'});
+
+  NotificationException(this.message);
+
   @override
-  String toString() => 'NotificationException: $message';
+  String toString() {
+    return message;
+  }
 }
 
-
-// other specific exceptions here if needed
-// class ServerException implements Exception {}
-// class NetworkException implements Exception {}
+// Add other specific exceptions as needed (e.g., NetworkException, DatabaseException)

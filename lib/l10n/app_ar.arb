@@ -1,8 +1,31 @@
 {
   "@@locale": "ar",
-  "helloWorld": "أهلاً بالعالم!",
-  "@helloWorld": {
-    "description": "تحية"
-  },
-  "languagePrompt": "اختر لغتك:"
+  
+  "homeGreeting": "مرحبا عبود",
+  "homeContinueLearning": "واصل التعلم, انت تصنع مستقبلك",
+  
+  "homeLatestNewsAndEvents": "آخر الاخبار والاحداث",
+  "homeNoNewsAvailable": "لا توجد أخبار متاحة",
+  "homeAnotherNewsItem": "خبر آخر",
+  "homeNewsDescription": "وصف للخبر الثاني هنا.",
+  "homeThirdEvent": "الحدث الثالث",
+  "homeThirdEventDetails": "تفاصيل حول الحدث الثالث القادم قريبًا.",
+  
+  "homeTodayTasks": "مهام اليوم",
+  "homeStartNewChallenge": "ابدأ تحدي جديد اليوم",
+  "homeNoTasksForToday": "لا توجد مهام لليوم!",
+  "homeReviewChapterOne": "مراجعة الفصل الاول",
+  "homeSolveMathHomework": "حل واجب الرياضيات",
+  
+  "homeContinueStudying": "تابع الدراسة",
+  
+  "homeRecentlyAdded": "المضافة مؤخرا",
+  "homeAdvancedSoftwareEngineering": "هندسة برمجيات متقدمة - الفصل 3",
+  
+  "seeAll": "عرض الكل",
+  
+  "navHome": "الرئيسية",
+  "navCourses": "المقررات",
+  "navCommunity": "المجتمع",
+  "navMore": "المزيد"
 }

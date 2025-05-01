@@ -1,29 +1,33 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tatbeeqi/app.dart';
-// Updated import:
-import 'package:tatbeeqi/core/di/service_locator.dart' as di; // Use alias
-import 'package:tatbeeqi/features/localization/presentation/manager/locale_cubit/locale_cubit.dart'; // Ensure correct path
-import 'package:tatbeeqi/features/notifications/presentation/manager/notification_cubit/notification_cubit.dart'; // Import Notification Cubit
-import 'package:tatbeeqi/features/navigation/presentation/manager/navigation_cubit/navigation_cubit.dart'; // Import Navigation Cubit
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:tatbeeqi/core/di/service_locator.dart' as di;
+import 'package:tatbeeqi/core/routing/app_router.dart';
+
+import 'package:tatbeeqi/features/localization/presentation/manager/locale_cubit/locale_cubit.dart';
+import 'package:tatbeeqi/features/localization/presentation/manager/locale_cubit/locale_state.dart';
+import 'package:tatbeeqi/features/news/presentation/manager/news_cubit.dart';
+
+import 'package:tatbeeqi/features/notifications/presentation/manager/notification_cubit/notification_cubit.dart';
+import 'package:tatbeeqi/features/navigation/presentation/manager/navigation_cubit/navigation_cubit.dart';
 import 'package:tatbeeqi/features/theme/presentation/manager/theme_cubit/theme_cubit.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'firebase_options.dart'; // Import generated Firebase options
+import 'firebase_options.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // --- Initialize Firebase ---
-  // Ensure you have run `flutterfire configure` and have firebase_options.dart
+  await dotenv.load();
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+  );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  // --- Initialize Dependency Injection ---
-  await di.init(); // Initialize dependencies using the new setup
-
-  // --- Run App ---
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -32,28 +36,50 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Provide all necessary Blocs/Cubits at the top level
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => di.sl<LocaleCubit>()..getSavedLocale(),
-        ),
-        BlocProvider(
-          create: (_) => di.sl<ThemeCubit>()
-            ..loadTheme(), // Changed from loadThemeMode to loadTheme
-        ),
-        BlocProvider(
-          // Create NotificationCubit and initialize notifications
-          create: (_) => di.sl<NotificationCubit>()..initializeNotifications(),
-          lazy: false, // Initialize immediately
-        ),
-        BlocProvider(
-          // Add Navigation Cubit Provider
-          create: (_) => di.sl<NavigationCubit>(),
-        ),
-        // Add other global providers here
-      ],
-      child: const AppView(), // Your App's root widget (contains MaterialApp)
-    );
+        providers: [
+          BlocProvider(
+            create: (_) => di.sl<LocaleCubit>()..getSavedLocale(),
+          ),
+          BlocProvider(
+            create: (_) => di.sl<ThemeCubit>()..loadTheme(),
+          ),
+          BlocProvider(
+            create: (_) =>
+                di.sl<NotificationCubit>()..initializeNotifications(),
+            lazy: false,
+          ),
+          BlocProvider(
+            create: (_) => di.sl<NewsCubit>()..fetchNews(),
+          ),
+          BlocProvider(
+            create: (_) => di.sl<NavigationCubit>(),
+          ),
+        ],
+        child: BlocBuilder<LocaleCubit, LocaleState>(
+          builder: (context, localeState) {
+            final currentLocale = (localeState is LocaleLoaded)
+                ? localeState.locale
+                : const Locale('en');
+
+            return BlocBuilder<ThemeCubit, ThemeData>(
+              builder: (context, currentThemeData) {
+                return MaterialApp.router(
+                  routerConfig: router,
+                  debugShowCheckedModeBanner: false,
+                  locale: currentLocale,
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  theme: currentThemeData,
+                );
+              },
+            );
+          },
+        ));
   }
 }

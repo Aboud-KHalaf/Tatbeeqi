@@ -9,6 +9,7 @@ class ThemeToggleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
+    final themeCubit = context.read<ThemeCubit>();
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -19,10 +20,10 @@ class ThemeToggleWidget extends StatelessWidget {
         ),
         Switch(
           value: isDarkMode,
-          onChanged: (value) {
-            final cubit = context.read<ThemeCubit>();
-            final nextMode = value ? ThemeMode.dark : ThemeMode.light;
-            cubit.setTheme(nextMode);
+          onChanged: (isDarkModeEnabled) {
+            themeCubit.setTheme(
+              isDarkModeEnabled ? ThemeMode.dark : ThemeMode.light,
+            );
           },
           activeColor: theme.colorScheme.primary,
           inactiveThumbColor: theme.colorScheme.surfaceContainerHighest,
@@ -30,7 +31,7 @@ class ThemeToggleWidget extends StatelessWidget {
         ),
         Icon(
           Icons.dark_mode,
-          color: theme.colorScheme.onPrimaryContainer,
+          color: theme.colorScheme.secondary,
         ),
       ],
     );

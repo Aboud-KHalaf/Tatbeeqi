@@ -1,8 +1,31 @@
 {
   "@@locale": "en",
-  "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "A greeting"
-  },
-  "languagePrompt": "Select your language:"
+  
+  "homeGreeting": "Hello Aboud",
+  "homeContinueLearning": "Continue learning, you're makeing your future",
+  
+  "homeLatestNewsAndEvents": "Latest News and Events",
+  "homeNoNewsAvailable": "No news available",
+  "homeAnotherNewsItem": "Another News Item",
+  "homeNewsDescription": "Description for the second news item goes here.",
+  "homeThirdEvent": "Third Event",
+  "homeThirdEventDetails": "Details about the third event happening soon.",
+  
+  "homeTodayTasks": "Today's Tasks",
+  "homeStartNewChallenge": "Start a new challenge today",
+  "homeNoTasksForToday": "No tasks for today!",
+  "homeReviewChapterOne": "Review Chapter 1",
+  "homeSolveMathHomework": "Solve Math homework",
+  
+  "homeContinueStudying": "Continue Studying",
+  
+  "homeRecentlyAdded": "Recently Added",
+  "homeAdvancedSoftwareEngineering": "Advanced Software Engineering - Chapter 3",
+  
+  "seeAll": "See all",
+  
+  "navHome": "Home",
+  "navCourses": "Courses",
+  "navCommunity": "Community",
+  "navMore": "More"
 }

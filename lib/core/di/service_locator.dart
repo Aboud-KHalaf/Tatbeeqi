@@ -2,6 +2,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tatbeeqi/core/di/core_dependencies.dart';
 import 'package:tatbeeqi/core/di/feature_dependencies.dart';
+import 'package:tatbeeqi/core/di/localization_dependencies.dart';
+// import 'package:tatbeeqi/core/di/navigation_dependencies.dart'; // Remove this import
+import 'package:tatbeeqi/core/di/news_dependencies.dart';
+import 'package:tatbeeqi/core/di/notification_dependencies.dart';
+import 'package:tatbeeqi/core/di/theme_dependencies.dart';
 import 'package:tatbeeqi/core/utils/app_logger.dart';
 
 final sl = GetIt.instance;
@@ -26,4 +31,12 @@ Future<void> init() async {
 
   // --- External ---
   // Register external dependencies like Dio, etc. if needed
+}
+
+// Optional: Reset function for testing or re-initialization
+Future<void> resetLocator() async {
+  await sl.reset();
+  print('🔄 Service Locator Reset');
+  // Re-initialize if needed
+  // await init();
 }

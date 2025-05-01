@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -12,6 +13,8 @@ class AppBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: onTap,
@@ -20,10 +23,15 @@ class AppBottomNavBar extends StatelessWidget {
       selectedItemColor: Theme.of(context).colorScheme.primary,
       unselectedItemColor: Colors.grey,
       elevation: 8,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+      items: [
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.home), label: l10n.navHome),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.school), label: l10n.navCourses),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.chat), label: l10n.navCommunity),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.more), label: l10n.navMore),
       ],
     );
   }
