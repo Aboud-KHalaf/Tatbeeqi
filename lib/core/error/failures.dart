@@ -34,5 +34,21 @@ class GeneralFailure extends Failure {
   const GeneralFailure(super.message);
 }
 
+class InvalidInputFailure extends Failure {
+  const InvalidInputFailure(super.message);
+}
+
 // Add other specific failures corresponding to exceptions if needed
 // class NetworkFailure extends Failure {}
+
+class DatabaseFailure extends Failure {
+  const DatabaseFailure(super.message);
+}
+
+class NotFoundFailure extends Failure {
+  const NotFoundFailure(super.message);
+}
+
+class UnexpectedFailure extends Failure {
+  const UnexpectedFailure(super.message);
+}

@@ -27,5 +27,9 @@
   "navHome": "Home",
   "navCourses": "Courses",
   "navCommunity": "Community",
-  "navMore": "More"
+  "navMore": "More",
+
+  "todoMyToDos" : "My ToDos",
+  "todoEditTask" : "Edit Task",
+  "todoAddNewTask" : "Add New Task"
 }

@@ -45,3 +45,25 @@ class NotificationException implements Exception {
 }
 
 // Add other specific exceptions as needed (e.g., NetworkException, DatabaseException)
+
+class DatabaseException implements Exception {
+  final String message;
+
+  DatabaseException(this.message);
+
+  @override
+  String toString() {
+    return message;
+  }
+}
+
+class NotFoundException implements Exception {
+  final String message;
+
+  NotFoundException(this.message);
+
+  @override
+  String toString() {
+    return message;
+  }
+}

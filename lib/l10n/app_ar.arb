@@ -27,5 +27,10 @@
   "navHome": "الرئيسية",
   "navCourses": "المقررات",
   "navCommunity": "المجتمع",
-  "navMore": "المزيد"
+  "navMore": "المزيد",
+  
+  "todoMyToDos" : "مهامي",
+  "todoEditTask" : "تعديل المهمة",
+  "todoAddNewTask" : "اضافة مهمة جديدة"
+ 
 }
