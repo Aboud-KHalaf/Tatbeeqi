@@ -32,7 +32,7 @@ Future<void> init() async {
 // Optional: Reset function for testing or re-initialization
 Future<void> resetLocator() async {
   await sl.reset();
-  print('🔄 Service Locator Reset');
+  AppLogger.info('🔄 Service Locator Reset');
   // Re-initialize if needed
   // await init();
 }

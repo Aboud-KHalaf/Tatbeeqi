@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoEmptyState extends StatelessWidget {
   const TodoEmptyState({super.key});
@@ -6,7 +7,8 @@ class TodoEmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+    final l10n = AppLocalizations.of(context)!;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -19,7 +21,7 @@ class TodoEmptyState extends StatelessWidget {
           ),
           const SizedBox(height: 24.0),
           Text(
-            'No Tasks Yet',
+            l10n.todoNoTasks,
             style: theme.textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.bold,
               color: theme.colorScheme.onSurface,
@@ -29,7 +31,7 @@ class TodoEmptyState extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32.0),
             child: Text(
-              'Add your first task by tapping the + button below',
+              l10n.todoAddFirstTask,
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.onSurface.withOpacity(0.7),

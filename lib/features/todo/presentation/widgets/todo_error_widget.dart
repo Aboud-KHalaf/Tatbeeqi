@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatbeeqi/features/todo/presentation/manager/todo_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ToDoErrorWidget extends StatelessWidget {
   const ToDoErrorWidget({
@@ -13,6 +14,7 @@ class ToDoErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Center(
       child: Padding(
@@ -39,7 +41,7 @@ class ToDoErrorWidget extends StatelessWidget {
                 context.read<ToDoCubit>().fetchToDos();
               },
               icon: const Icon(Icons.refresh),
-              label: const Text('Try Again'),
+              label: Text(l10n.tryAgain),
               style: ElevatedButton.styleFrom(
                 backgroundColor: theme.colorScheme.primary,
                 foregroundColor: theme.colorScheme.onPrimary,

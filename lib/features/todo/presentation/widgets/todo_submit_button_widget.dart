@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoSubmitButtonWidget extends StatelessWidget {
   final bool isEditing;
@@ -13,6 +14,7 @@ class TodoSubmitButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return SizedBox(
       width: double.infinity,
@@ -29,8 +31,8 @@ class TodoSubmitButtonWidget extends StatelessWidget {
         ),
         child: Text(
           isEditing
-              ? 'Update Task'
-              : 'Add Task', // Consider using AppLocalizations here
+              ? l10n.todoUpdateTask
+              : l10n.todoAddTask,
           style: theme.textTheme.titleMedium?.copyWith(
             color: theme.colorScheme.onPrimary,
             fontWeight: FontWeight.bold,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoLoadingWidget extends StatelessWidget {
   const TodoLoadingWidget({super.key});
@@ -6,6 +7,7 @@ class TodoLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     
     return Center(
       child: Column(
@@ -16,7 +18,7 @@ class TodoLoadingWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16.0),
           Text(
-            'Loading tasks...',
+            l10n.todoLoadingTasks,
             style: theme.textTheme.bodyLarge?.copyWith(
               color: theme.colorScheme.onSurface.withOpacity(0.7),
             ),

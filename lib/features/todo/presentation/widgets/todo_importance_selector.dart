@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tatbeeqi/features/todo/domain/entities/todo_entity.dart';
 import 'package:tatbeeqi/features/todo/presentation/widgets/importance_option_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoImportanceSelector extends StatelessWidget {
   final ToDoImportance selectedImportance;
@@ -27,12 +28,13 @@ class TodoImportanceSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Importance',
+          l10n.todoImportance,
           style: theme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w500,
           ),
@@ -41,21 +43,21 @@ class TodoImportanceSelector extends StatelessWidget {
         Row(
           children: [
             ImportanceOptionWidget(
-              label: 'Low',
+              label: l10n.todoImportanceLow,
               color: _getImportanceColor(ToDoImportance.low),
               isSelected: selectedImportance == ToDoImportance.low,
               onTap: () => onImportanceChanged(ToDoImportance.low),
             ),
-            const SizedBox(width: 12.0),
+            const SizedBox(width: 8.0),
             ImportanceOptionWidget(
-              label: 'Medium',
+              label: l10n.todoImportanceMedium,
               color: _getImportanceColor(ToDoImportance.medium),
               isSelected: selectedImportance == ToDoImportance.medium,
               onTap: () => onImportanceChanged(ToDoImportance.medium),
             ),
-            const SizedBox(width: 12.0),
+            const SizedBox(width: 8.0),
             ImportanceOptionWidget(
-              label: 'High',
+              label: l10n.todoImportanceHigh,
               color: _getImportanceColor(ToDoImportance.high),
               isSelected: selectedImportance == ToDoImportance.high,
               onTap: () => onImportanceChanged(ToDoImportance.high),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoDueDateSelectorWidget extends StatelessWidget {
   final DateTime? selectedDueDate;
@@ -16,6 +17,7 @@ class TodoDueDateSelectorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return InkWell(
       onTap: onSelectDate,
@@ -37,8 +39,8 @@ class TodoDueDateSelectorWidget extends StatelessWidget {
             Expanded(
               child: Text(
                 selectedDueDate == null
-                    ? 'Set Due Date (Optional)' // Consider using AppLocalizations here
-                    : 'Due: ${DateFormat('MMM dd, yyyy - HH:mm').format(selectedDueDate!)}',
+                    ? l10n.todoSetDueDate
+                    : l10n.todoDueDate(DateFormat('MMM dd, yyyy - HH:mm').format(selectedDueDate!)),
                 style: TextStyle(
                   color: selectedDueDate == null
                       ? theme.colorScheme.onSurface.withOpacity(0.7)

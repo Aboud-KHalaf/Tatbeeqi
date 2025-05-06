@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoCompletionCheckboxWidget extends StatelessWidget {
   final bool isCompleted;
@@ -13,6 +14,7 @@ class TodoCompletionCheckboxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       decoration: BoxDecoration(
@@ -40,7 +42,7 @@ class TodoCompletionCheckboxWidget extends StatelessWidget {
           ),
           const SizedBox(width: 12.0),
           Text(
-            'Mark as completed', // Consider using AppLocalizations here
+            l10n.todoMarkAsCompleted,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.onSurface,
               fontWeight: FontWeight.w500,

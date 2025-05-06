@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoDescriptionFieldWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -8,11 +9,12 @@ class TodoDescriptionFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-        labelText: 'Description',
+        labelText: l10n.todoDescription,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: BorderSide(color: theme.colorScheme.outline),

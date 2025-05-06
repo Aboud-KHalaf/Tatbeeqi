@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tatbeeqi/features/todo/domain/entities/todo_entity.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoListItem extends StatelessWidget {
   final ToDoEntity todo;
@@ -29,20 +30,22 @@ class TodoListItem extends StatelessWidget {
     }
   }
 
-  String _getImportanceText() {
+  String _getImportanceText(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     switch (todo.importance) {
       case ToDoImportance.high:
-        return 'High';
+        return l10n.todoImportanceHigh;
       case ToDoImportance.medium:
-        return 'Medium';
+        return l10n.todoImportanceMedium;
       case ToDoImportance.low:
       default:
-        return 'Low';
+        return l10n.todoImportanceLow;
     }
   }
 
-  String _formatDueDate() {
-    if (todo.dueDate == null) return 'No due date';
+  String _formatDueDate(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    if (todo.dueDate == null) return l10n.todoNoDueDate;
     return DateFormat('MMM dd, yyyy - HH:mm').format(todo.dueDate!);
   }
 
@@ -118,7 +121,7 @@ class TodoListItem extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Text(
-                        _getImportanceText(),
+                        _getImportanceText(context),
                         style: const TextStyle(fontSize: 12.0),
                       ),
                     ),
@@ -127,7 +130,7 @@ class TodoListItem extends StatelessWidget {
                       const Icon(Icons.access_time, size: 16.0),
                       const SizedBox(width: 4.0),
                       Text(
-                        _formatDueDate(),
+                        _formatDueDate(context),
                         style: TextStyle(
                           fontSize: 12.0,
                           color: todo.dueDate!.isBefore(DateTime.now()) &&

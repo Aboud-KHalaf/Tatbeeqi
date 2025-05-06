@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ToDoNoDataAvaiableWidget extends StatelessWidget {
   const ToDoNoDataAvaiableWidget({
@@ -8,10 +9,11 @@ class ToDoNoDataAvaiableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Center(
       child: Text(
-        'No data available',
+        l10n.todoNoDataAvailable,
         style: theme.textTheme.bodyLarge?.copyWith(
           color: theme.colorScheme.onSurface.withOpacity(0.7),
         ),

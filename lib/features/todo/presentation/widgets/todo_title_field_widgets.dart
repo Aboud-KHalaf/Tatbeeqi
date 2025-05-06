@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoTitleFieldWidgets extends StatelessWidget {
   final TextEditingController controller;
@@ -8,11 +9,12 @@ class TodoTitleFieldWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-        labelText: 'Title',
+        labelText: l10n.todoTitle,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: BorderSide(color: theme.colorScheme.outline),
@@ -34,7 +36,7 @@ class TodoTitleFieldWidgets extends StatelessWidget {
       style: TextStyle(color: theme.colorScheme.onSurface),
       validator: (value) {
         if (value == null || value.trim().isEmpty) {
-          return 'Please enter a title';
+          return l10n.todoEnterTitle;
         }
         return null;
       },
