@@ -1,6 +1,7 @@
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:tatbeeqi/core/utils/app_logger.dart';
 
 const String _dbName = 'todos_database.db';
 const String _tableName = 'todos';
@@ -34,7 +35,7 @@ class DatabaseService {
       return _database!;
     } catch (e) {
       _isInitializing = false;
-      print('Database Initialization Error: $e');
+      AppLogger.error('Database Initialization Error: $e');
       // Consider re-throwing a specific initialization exception
       throw Exception('Failed to initialize database: ${e.toString()}');
     }
@@ -43,7 +44,7 @@ class DatabaseService {
   Future<Database> _initDB() async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, _dbName);
-    print('Database path: $path'); // Log the path for debugging
+    AppLogger.info('Database path: $path'); // Log the path for debugging
     return await openDatabase(
       path,
       version: 1, // Increment version for schema migrations
@@ -54,7 +55,7 @@ class DatabaseService {
 
   // Define the schema creation logic
   Future<void> _onCreate(Database db, int version) async {
-    print('Creating database table: $_tableName');
+    AppLogger.info('Creating database table: $_tableName');
     await db.execute('''
       CREATE TABLE $_tableName (
         $_colId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -65,7 +66,7 @@ class DatabaseService {
         $_colIsCompleted INTEGER NOT NULL
       )
     ''');
-    print('Table $_tableName created successfully.');
+    AppLogger.info('Table $_tableName created successfully.');
     // Add other tables if needed
   }
 
@@ -81,7 +82,7 @@ class DatabaseService {
     if (_database != null && _database!.isOpen) {
       await _database!.close();
       _database = null; // Reset the instance
-      print('Database closed.');
+      AppLogger.info('Database closed.');
     }
   }
 }

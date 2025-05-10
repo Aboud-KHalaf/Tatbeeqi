@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tatbeeqi/core/utils/app_functions.dart';
 import 'package:tatbeeqi/features/todo/domain/entities/todo_entity.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,19 +17,6 @@ class TodoListItem extends StatelessWidget {
     required this.onEdit,
     required this.onDelete,
   });
-
-  Color _getImportanceColor() {
-    switch (todo.importance) {
-      case ToDoImportance.high:
-        return Colors.red.shade200;
-      case ToDoImportance.medium:
-        return Colors.orange.shade200;
-      case ToDoImportance.low:
-        return Colors.green.shade200;
-      default:
-        return Colors.cyan.shade200;
-    }
-  }
 
   String _getImportanceText(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -117,7 +105,7 @@ class TodoListItem extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8.0, vertical: 4.0),
                       decoration: BoxDecoration(
-                        color: _getImportanceColor(),
+                        color: getColorByImportance(todo.importance),
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Text(
@@ -157,17 +145,10 @@ class TodoListItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.0),
       ),
       alignment: Alignment.centerRight,
-      padding: const EdgeInsets.only(right: 20.0),
+      margin: const EdgeInsets.only(right: 20.0, top: 15, bottom: 15),
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(
-            'Delete',
-            style: TextStyle(
-              color: Colors.red,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
           SizedBox(width: 8),
           Icon(Icons.delete, color: Colors.red),
         ],
@@ -176,25 +157,27 @@ class TodoListItem extends StatelessWidget {
   }
 
   Future<bool> _showDeleteConfirmation(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
+
     return await showDialog<bool>(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('Confirm Delete'),
-              content: const Text('Are you sure you want to delete this item?'),
+              title: Text(l10n.todoConfirmDelete),
+              content: Text(l10n.todoDeleteConfirmation),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0),
               ),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
-                  child: const Text('Cancel'),
+                  child: Text(l10n.todoCancel),
                 ),
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(true),
-                  child: const Text(
-                    'Delete',
-                    style: TextStyle(color: Colors.red),
+                  child: Text(
+                    l10n.todoDelete,
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ),
               ],

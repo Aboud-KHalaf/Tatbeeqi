@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tatbeeqi/features/localization/presentation/widgets/language_switcher_widget.dart';
 import 'package:tatbeeqi/features/theme/presentation/widgets/theme_toggle_widget.dart';
 
 class SettingsView extends StatelessWidget {
@@ -10,7 +11,13 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: ThemeToggleWidget(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ThemeToggleWidget(),
+            LanguageSwitcherWidget(),
+          ],
+        ),
       ),
     );
   }

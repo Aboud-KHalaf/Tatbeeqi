@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tatbeeqi/core/error/exceptions.dart';
+import 'package:tatbeeqi/core/utils/app_logger.dart';
 import 'package:tatbeeqi/features/news/data/models/news_item_model.dart';
 
 abstract class NewsRemoteDataSource {
@@ -24,10 +25,10 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
 
       return response.map((item) => NewsItemModel.fromJson(item)).toList();
     } on PostgrestException catch (e) {
-      print('Supabase Error: ${e.message}');
+      AppLogger.error('Supabase Error: ${e.message}');
       throw ServerException(e.message);
     } catch (e) {
-      print('Generic Error fetching news: $e');
+      AppLogger.error('Generic Error fetching news: $e');
       throw ServerException('Failed to load news items');
     }
   }

@@ -5,8 +5,8 @@ import 'package:tatbeeqi/features/todo/domain/entities/todo_entity.dart';
 import 'package:tatbeeqi/features/todo/presentation/manager/todo_cubit.dart';
 import 'package:tatbeeqi/features/todo/presentation/widgets/todo_list_item_widget.dart';
 
-class ToDoAnimatedListWidget extends StatelessWidget {
-  const ToDoAnimatedListWidget({
+class ToDoListViewWidget extends StatelessWidget {
+  const ToDoListViewWidget({
     super.key,
     required this.todos,
   });

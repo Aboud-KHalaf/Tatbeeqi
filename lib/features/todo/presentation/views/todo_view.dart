@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatbeeqi/core/utils/app_methods.dart';
 import 'package:tatbeeqi/features/todo/presentation/manager/todo_cubit.dart';
-import 'package:tatbeeqi/features/todo/presentation/widgets/todo_animated_list_widget.dart';
+import 'package:tatbeeqi/features/todo/presentation/widgets/todo_list_view_widget.dart';
 import 'package:tatbeeqi/features/todo/presentation/widgets/todo_empty_state.dart';
 import 'package:tatbeeqi/features/todo/presentation/widgets/todo_error_widget.dart';
 import 'package:tatbeeqi/features/todo/presentation/widgets/todo_loading_widget.dart';
@@ -29,7 +29,7 @@ class _TodoViewState extends State<TodoView>
 
     _fabAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(microseconds: 300),
+      duration: const Duration(milliseconds: 600),
     );
 
     _fabScaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -78,17 +78,17 @@ class _TodoViewState extends State<TodoView>
             if (todos.isEmpty) {
               return const TodoEmptyState();
             }
-            return ToDoAnimatedListWidget(todos: todos);
+            return ToDoListViewWidget(todos: todos);
           }
 
           return const ToDoNoDataAvaiableWidget();
         },
       ),
-      floatingActionButton: _buildToDoViewFAB(context),
+      floatingActionButton: _buildToDoViewScaleTransitionFAB(context),
     );
   }
 
-  ScaleTransition _buildToDoViewFAB(BuildContext context) {
+  ScaleTransition _buildToDoViewScaleTransitionFAB(BuildContext context) {
     final theme = Theme.of(context);
     return ScaleTransition(
       scale: _fabScaleAnimation,

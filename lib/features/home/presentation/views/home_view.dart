@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:tatbeeqi/features/home/presentation/widgets/custom_app_bar.dart';
 import 'package:tatbeeqi/features/home/presentation/widgets/recently_added_section.dart';
 import 'package:tatbeeqi/features/home/presentation/widgets/study_progress_section.dart';
-import 'package:tatbeeqi/features/home/presentation/widgets/today_tasks_section.dart';
 import 'package:tatbeeqi/features/news/presentation/views/all_news_view.dart';
 import 'package:tatbeeqi/features/news/presentation/widgets/news_section.dart';
 import 'package:tatbeeqi/features/todo/presentation/views/todo_view.dart';
+import 'package:tatbeeqi/features/todo/presentation/widgets/today_tasks_section.dart';
 
 class HomeView extends StatelessWidget {
   static String routePath = '/homeView';
@@ -42,7 +42,7 @@ class HomeView extends StatelessWidget {
           _SectionTitle(title: l10n.homeContinueStudying, onPressed: () {}),
           const SizedBox(height: 12.0),
           const StudyProgressSection(),
-          const SizedBox(height: 28.0),
+          const SizedBox(height: .0),
           _SectionTitle(title: l10n.homeRecentlyAdded, onPressed: () {}),
           const SizedBox(height: 12.0),
           const RecentlyAddedSection(),

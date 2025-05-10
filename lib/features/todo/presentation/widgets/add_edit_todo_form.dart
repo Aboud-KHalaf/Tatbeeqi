@@ -95,9 +95,9 @@ class _AddEditToDoFormState extends State<AddEditToDoForm>
 
   void _submitForm() {
     if (!_formKey.currentState!.validate()) return;
-
+    int defaultId = DateTime.now().second + DateTime.now().millisecond;
     final todo = ToDoEntity(
-      id: widget.initialToDo?.id,
+      id: widget.initialToDo?.id ?? defaultId,
       title: _titleController.text.trim(),
       description: _descriptionController.text.trim(),
       importance: _selectedImportance,
