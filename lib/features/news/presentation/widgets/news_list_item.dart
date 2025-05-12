@@ -28,7 +28,7 @@ class NewsListItem extends StatelessWidget {
         double value = 1.0;
         if (pageController.position.haveDimensions) {
           value = (pageController.page ?? 0) - index;
-          value = (1 - (value.abs() * 0.2)).clamp(0.8, 1.0);
+          value = (1 - (value.abs() * 0.4)).clamp(0.8, 1.0);
         }
         return Transform.scale(
           scale: value,

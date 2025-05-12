@@ -16,25 +16,14 @@ class NewsCardTitle extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
-    return TweenAnimationBuilder<double>(
-      tween: Tween<double>(begin: 0.8, end: 1.0),
-      duration: const Duration(milliseconds: 300),
-      builder: (context, value, child) {
-        return Transform.scale(
-          scale: isCurrentPage ? value : 1.0,
-          alignment: Alignment.centerLeft,
-          child: child,
-        );
-      },
-      child: Text(
-        item.title,
-        style: textTheme.titleMedium?.copyWith(
-          fontWeight: FontWeight.bold,
-          color: colorScheme.onSurface,
-        ),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+    return Text(
+      item.title,
+      style: textTheme.titleMedium?.copyWith(
+        fontWeight: FontWeight.bold,
+        color: colorScheme.onSurface,
       ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
