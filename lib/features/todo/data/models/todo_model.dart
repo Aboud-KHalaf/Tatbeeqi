@@ -2,7 +2,7 @@ import 'package:tatbeeqi/features/todo/domain/entities/todo_entity.dart';
 
 class ToDoModel extends ToDoEntity {
   const ToDoModel({
-    super.id,
+    required super.id,
     required super.title,
     required super.description,
     required super.importance,
@@ -13,8 +13,7 @@ class ToDoModel extends ToDoEntity {
   // Factory constructor to create a ToDoModel from a map (e.g., from sqflite)
   factory ToDoModel.fromMap(Map<String, dynamic> map) {
     return ToDoModel(
-      id: map['id']
-          as int?, // Allow null if id is not always present (e.g., before insert)
+      id: map['id'] as String,
       title: map['title'] as String,
       description: map['description'] as String,
       importance:
@@ -29,7 +28,7 @@ class ToDoModel extends ToDoEntity {
   // Method to convert ToDoModel to a map (e.g., for sqflite)
   Map<String, dynamic> toMap() {
     return {
-      'id': id, // id might be null if it's a new item not yet inserted
+      'id': id,
       'title': title,
       'description': description,
       'importance': importance.index, // Store enum index

@@ -26,7 +26,7 @@ class ToDoListViewWidget extends StatelessWidget {
             todo: todo,
             onToggleCompletion: (isCompleted) {
               context.read<ToDoCubit>().toggleCompletion(
-                    todo.id!,
+                    todo.id,
                     !isCompleted,
                   );
             },
@@ -34,7 +34,7 @@ class ToDoListViewWidget extends StatelessWidget {
               showAddEditTodoBottomSheet(context, todo: todo);
             },
             onDelete: () {
-              context.read<ToDoCubit>().deleteToDo(todo.id!);
+              context.read<ToDoCubit>().deleteToDo(todo.id);
             },
           ),
         );

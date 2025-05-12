@@ -4,6 +4,7 @@ import 'package:tatbeeqi/features/todo/domain/entities/todo_entity.dart';
 import 'package:tatbeeqi/features/todo/presentation/manager/todo_cubit.dart';
 import 'package:tatbeeqi/features/todo/presentation/widgets/add_edit_todo_form_content_widget.dart';
 import 'package:tatbeeqi/features/todo/presentation/widgets/todo_bottom_sheet_container_widget.dart';
+import 'package:uuid/uuid.dart';
 
 class AddEditToDoForm extends StatefulWidget {
   final ToDoEntity? initialToDo;
@@ -95,9 +96,8 @@ class _AddEditToDoFormState extends State<AddEditToDoForm>
 
   void _submitForm() {
     if (!_formKey.currentState!.validate()) return;
-    int defaultId = DateTime.now().second + DateTime.now().millisecond;
-    final todo = ToDoEntity(
-      id: widget.initialToDo?.id ?? defaultId,
+    final ToDoEntity todo = ToDoEntity(
+      id: widget.initialToDo?.id ?? const Uuid().v4(),
       title: _titleController.text.trim(),
       description: _descriptionController.text.trim(),
       importance: _selectedImportance,

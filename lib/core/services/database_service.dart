@@ -58,9 +58,9 @@ class DatabaseService {
     AppLogger.info('Creating database table: $_tableName');
     await db.execute('''
       CREATE TABLE $_tableName (
-        $_colId INTEGER PRIMARY KEY AUTOINCREMENT,
+        $_colId TEXT PRIMARY KEY,
         $_colTitle TEXT NOT NULL,
-        $_colDescription TEXT NOT NULL,
+        $_colDescription TEXT,
         $_colImportance INTEGER NOT NULL,
         $_colDueDate TEXT,
         $_colIsCompleted INTEGER NOT NULL

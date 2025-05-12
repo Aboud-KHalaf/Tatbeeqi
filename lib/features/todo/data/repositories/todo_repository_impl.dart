@@ -25,7 +25,7 @@ class ToDoRepositoryImpl implements ToDoRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> deleteToDo(int id) async {
+  Future<Either<Failure, Unit>> deleteToDo(String id) async {
     try {
       await localDataSource.deleteToDo(id);
       return const Right(unit);
@@ -37,7 +37,7 @@ class ToDoRepositoryImpl implements ToDoRepository {
   }
 
   @override
-  Future<Either<Failure, ToDoEntity>> getToDoById(int id) async {
+  Future<Either<Failure, ToDoEntity>> getToDoById(String id) async {
     try {
       final todoModel = await localDataSource.getToDoById(id);
       return Right(todoModel); // ToDoModel extends ToDoEntity
@@ -65,7 +65,7 @@ class ToDoRepositoryImpl implements ToDoRepository {
 
   @override
   Future<Either<Failure, Unit>> toggleToDoCompletion(
-      int id, bool isCompleted) async {
+      String id, bool isCompleted) async {
     try {
       await localDataSource.toggleToDoCompletion(id, isCompleted);
       return const Right(unit);
@@ -79,10 +79,6 @@ class ToDoRepositoryImpl implements ToDoRepository {
   @override
   Future<Either<Failure, Unit>> updateToDo(ToDoEntity todo) async {
     try {
-      if (todo.id == null) {
-        return const Left(
-            InvalidInputFailure('ToDo ID cannot be null for update.'));
-      }
       final todoModel = ToDoModel.fromEntity(todo);
       await localDataSource.updateToDo(todoModel);
       return const Right(unit);

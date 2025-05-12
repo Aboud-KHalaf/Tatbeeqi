@@ -5,11 +5,11 @@ import 'package:tatbeeqi/features/todo/data/models/todo_model.dart';
 
 abstract class ToDoLocalDataSource {
   Future<List<ToDoModel>> getToDos();
-  Future<ToDoModel> getToDoById(int id);
+  Future<ToDoModel> getToDoById(String id);
   Future<int> addToDo(ToDoModel todo);
   Future<int> updateToDo(ToDoModel todo);
-  Future<int> deleteToDo(int id);
-  Future<int> toggleToDoCompletion(int id, bool isCompleted);
+  Future<int> deleteToDo(String id);
+  Future<int> toggleToDoCompletion(String id, bool isCompleted);
 }
 
 const String _tableName = 'todos';
@@ -26,7 +26,7 @@ class ToDoLocalDataSourceImpl implements ToDoLocalDataSource {
   Future<int> addToDo(ToDoModel todo) async {
     try {
       final db = await _databaseService.database;
-      final map = todo.toMap()..remove('id');
+      final map = todo.toMap();
       final id = await db.insert(
         _tableName,
         map,
@@ -42,7 +42,7 @@ class ToDoLocalDataSourceImpl implements ToDoLocalDataSource {
   }
 
   @override
-  Future<int> deleteToDo(int id) async {
+  Future<int> deleteToDo(String id) async {
     try {
       final db = await _databaseService.database;
       final result = await db.delete(
@@ -57,7 +57,7 @@ class ToDoLocalDataSourceImpl implements ToDoLocalDataSource {
   }
 
   @override
-  Future<ToDoModel> getToDoById(int id) async {
+  Future<ToDoModel> getToDoById(String id) async {
     try {
       final db = await _databaseService.database;
       final maps = await db.query(
@@ -90,7 +90,7 @@ class ToDoLocalDataSourceImpl implements ToDoLocalDataSource {
   }
 
   @override
-  Future<int> toggleToDoCompletion(int id, bool isCompleted) async {
+  Future<int> toggleToDoCompletion(String id, bool isCompleted) async {
     try {
       final db = await _databaseService.database;
       final result = await db.update(

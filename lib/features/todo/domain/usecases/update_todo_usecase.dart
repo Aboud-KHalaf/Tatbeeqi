@@ -11,10 +11,6 @@ class UpdateToDoUseCase implements UseCase<Unit, ToDoEntity> {
 
   @override
   Future<Either<Failure, Unit>> call(ToDoEntity todo) async {
-    if (todo.id == null) {
-      return const Left(
-          InvalidInputFailure('ToDo ID cannot be null for update.'));
-    }
     return await repository.updateToDo(todo);
   }
 }

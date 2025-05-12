@@ -16,11 +16,11 @@ class ToggleToDoCompletionUseCase implements UseCase<Unit, ToggleToDoParams> {
 }
 
 class ToggleToDoParams extends Equatable {
-    final int id;
-    final bool isCompleted;
+  final String id;
+  final bool isCompleted;
 
-    const ToggleToDoParams({required this.id, required this.isCompleted});
+  const ToggleToDoParams({required this.id, required this.isCompleted});
 
-    @override
-    List<Object?> get props => [id, isCompleted];
+  @override
+  List<Object?> get props => [id, isCompleted];
 }

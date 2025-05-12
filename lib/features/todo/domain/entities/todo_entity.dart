@@ -29,7 +29,7 @@ extension ImportanceExtension on ToDoImportance {
 }
 
 class ToDoEntity extends Equatable {
-  final int? id; // Nullable for new todos before saving
+  final String id;
   final String title;
   final String description;
   final ToDoImportance importance;
@@ -37,7 +37,7 @@ class ToDoEntity extends Equatable {
   final bool isCompleted;
 
   const ToDoEntity({
-    this.id,
+    required this.id,
     required this.title,
     required this.description,
     required this.importance,
@@ -47,7 +47,7 @@ class ToDoEntity extends Equatable {
 
   // Helper to create a copy with updated values
   ToDoEntity copyWith({
-    int? id,
+    String? id,
     String? title,
     String? description,
     ToDoImportance? importance,

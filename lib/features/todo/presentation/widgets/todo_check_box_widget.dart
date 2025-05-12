@@ -19,7 +19,7 @@ class ToDoCheckBoxWidget extends StatelessWidget {
     return Checkbox(
       value: task.isCompleted,
       onChanged: (bool? value) {
-        BlocProvider.of<ToDoCubit>(context).toggleCompletion(task.id!, !value!);
+        BlocProvider.of<ToDoCubit>(context).toggleCompletion(task.id, !value!);
       },
       activeColor: colorScheme.primary,
       checkColor: colorScheme.onPrimary,
