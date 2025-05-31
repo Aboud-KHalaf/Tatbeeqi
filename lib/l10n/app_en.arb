@@ -1,0 +1,156 @@
+{
+  "@@locale": "en",
+  
+  "homeGreeting": "Hello Aboud",
+  "homeContinueLearning": "Continue learning, you're makeing your future",
+  
+  "homeLatestNewsAndEvents": "Latest News and Events",
+  "homeNoNewsAvailable": "No news available",
+  "homeAnotherNewsItem": "Another News Item",
+  "homeNewsDescription": "Description for the second news item goes here.",
+  "homeThirdEvent": "Third Event",
+  "homeThirdEventDetails": "Details about the third event happening soon.",
+  
+  "homeTodayTasks": "Today's Tasks",
+  "homeStartNewChallenge": "Start a new challenge today",
+  "homeNoTasksForToday": "No tasks for today!",
+  "homeReviewChapterOne": "Review Chapter 1",
+  "homeSolveMathHomework": "Solve Math homework",
+  
+  "homeContinueStudying": "Continue Studying",
+  
+  "homeRecentlyAdded": "Recently Added",
+  "homeAdvancedSoftwareEngineering": "Advanced Software Engineering - Chapter 3",
+  
+  "seeAll": "See all",
+  
+  "navHome": "Home",
+  "navCourses": "Courses",
+  "navCommunity": "Community",
+  "navMore": "More",
+
+  "todoMyToDos" : "My ToDos",
+  "todoEditTask" : "Edit Task",
+  "todoAddNewTask" : "Add New Task",
+  "todoNoTasks": "No Tasks Yet",
+  "@todoNoTasks": {
+    "description": "Text shown when there are no tasks"
+  },
+  
+  "todoAddFirstTask": "Add your first task by tapping the + button below",
+  "@todoAddFirstTask": {
+    "description": "Instruction for adding first task"
+  },
+  
+  "todoSetDueDate": "Set Due Date (Optional)",
+  "@todoSetDueDate": {
+    "description": "Label for setting due date"
+  },
+  
+  "todoDueDate": "Due: {date}",
+  "@todoDueDate": {
+    "description": "Due date with formatted date",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "todoUpdateTask": "Update Task",
+  "@todoUpdateTask": {
+    "description": "Button text for updating a task"
+  },
+  
+  "todoAddTask": "Add Task",
+  "@todoAddTask": {
+    "description": "Button text for adding a task"
+  },
+  
+  "todoMarkAsCompleted": "Mark as completed",
+  "@todoMarkAsCompleted": {
+    "description": "Label for completion checkbox"
+  },
+  
+  "todoLoadingTasks": "Loading tasks...",
+  "@todoLoadingTasks": {
+    "description": "Text shown when loading tasks"
+  },
+  
+  "todoNoDataAvailable": "No data available",
+  "@todoNoDataAvailable": {
+    "description": "Text shown when no data is available"
+  },
+  
+  "newsNoNewsAvailable": "No news available",
+  "@newsNoNewsAvailable": {
+    "description": "Text shown when there are no news"
+  },
+  
+  "newsCheckBackLater": "Check back later for updates",
+  "@newsCheckBackLater": {
+    "description": "Message to check back later for news updates"
+  },
+
+  "tryAgain" : "Try Again",
+  
+  "todoTitle": "Title",
+  "@todoTitle": {
+    "description": "Label for task title field"
+  },
+  
+  "todoEnterTitle": "Please enter a title",
+  "@todoEnterTitle": {
+    "description": "Validation message for empty title"
+  },
+  
+  "todoDescription": "Description",
+  "@todoDescription": {
+    "description": "Label for task description field"
+  },
+  
+  "todoImportance": "Importance",
+  "@todoImportance": {
+    "description": "Label for task importance section"
+  },
+  
+  "todoImportanceLow": "Low",
+  "@todoImportanceLow": {
+    "description": "Label for low importance option"
+  },
+  
+  "todoImportanceMedium": "Medium",
+  "@todoImportanceMedium": {
+    "description": "Label for medium importance option"
+  },
+  
+  "todoImportanceHigh": "High",
+  "@todoImportanceHigh": {
+    "description": "Label for high importance option"
+  },
+  
+  "todoNoDueDate": "No due date",
+  "@todoNoDueDate": {
+    "description": "Text shown when no due date is set"
+  },
+  
+  "todoConfirmDelete": "Confirm Delete",
+  "@todoConfirmDelete": {
+    "description": "Title for delete confirmation dialog"
+  },
+  
+  "todoDeleteConfirmation": "Are you sure you want to delete this item?",
+  "@todoDeleteConfirmation": {
+    "description": "Message for delete confirmation dialog"
+  },
+  
+  "todoCancel": "Cancel",
+  "@todoCancel": {
+    "description": "Label for cancel button"
+  },
+  
+  "todoDelete": "Delete",
+  "@todoDelete": {
+    "description": "Label for delete button"
+  }
+}

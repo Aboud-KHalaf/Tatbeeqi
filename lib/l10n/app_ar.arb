@@ -1,0 +1,156 @@
+{
+  "@@locale": "ar",
+  
+  "homeGreeting": "مرحبا عبود",
+  "homeContinueLearning": "واصل التعلم, انت تصنع مستقبلك",
+  
+  "homeLatestNewsAndEvents": "آخر الاخبار والاحداث",
+  "homeNoNewsAvailable": "لا توجد أخبار متاحة",
+  "homeAnotherNewsItem": "خبر آخر",
+  "homeNewsDescription": "وصف للخبر الثاني هنا.",
+  "homeThirdEvent": "الحدث الثالث",
+  "homeThirdEventDetails": "تفاصيل حول الحدث الثالث القادم قريبًا.",
+  
+  "homeTodayTasks": "مهام اليوم",
+  "homeStartNewChallenge": "ابدأ تحدي جديد اليوم",
+  "homeNoTasksForToday": "لا توجد مهام لليوم!",
+  "homeReviewChapterOne": "مراجعة الفصل الاول",
+  "homeSolveMathHomework": "حل واجب الرياضيات",
+  
+  "homeContinueStudying": "تابع الدراسة",
+  
+  "homeRecentlyAdded": "المضافة مؤخرا",
+  "homeAdvancedSoftwareEngineering": "هندسة برمجيات متقدمة - الفصل 3",
+  
+  "seeAll": "عرض الكل",
+  
+  "navHome": "الرئيسية",
+  "navCourses": "المقررات",
+  "navCommunity": "المجتمع",
+  "navMore": "المزيد",
+  
+  "todoMyToDos" : "مهامي",
+  "todoEditTask" : "تعديل المهمة",
+  "todoAddNewTask" : "اضافة مهمة جديدة",
+  "todoNoTasks": "لا توجد مهام بعد",
+  "@todoNoTasks": {
+    "description": "Text shown when there are no tasks"
+  },
+  
+  "todoAddFirstTask": "أضف مهمتك الأولى بالنقر على زر + أدناه",
+  "@todoAddFirstTask": {
+    "description": "Instruction for adding first task"
+  },
+  
+  "todoSetDueDate": "تعيين تاريخ الاستحقاق (اختياري)",
+  "@todoSetDueDate": {
+    "description": "Label for setting due date"
+  },
+  
+  "todoDueDate": "الاستحقاق: {date}",
+  "@todoDueDate": {
+    "description": "Due date with formatted date",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "todoUpdateTask": "تحديث المهمة",
+  "@todoUpdateTask": {
+    "description": "Button text for updating a task"
+  },
+  
+  "todoAddTask": "إضافة مهمة",
+  "@todoAddTask": {
+    "description": "Button text for adding a task"
+  },
+  
+  "todoMarkAsCompleted": "وضع علامة كمكتمل",
+  "@todoMarkAsCompleted": {
+    "description": "Label for completion checkbox"
+  },
+  
+  "todoLoadingTasks": "جاري تحميل المهام...",
+  "@todoLoadingTasks": {
+    "description": "Text shown when loading tasks"
+  },
+  
+  "todoNoDataAvailable": "لا توجد بيانات متاحة",
+  "@todoNoDataAvailable": {
+    "description": "Text shown when no data is available"
+  },
+  
+  "newsNoNewsAvailable": "لا توجد أخبار متاحة",
+  "@newsNoNewsAvailable": {
+    "description": "Text shown when there are no news"
+  },
+  
+  "newsCheckBackLater": "تحقق لاحقًا للحصول على التحديثات",
+  "@newsCheckBackLater": {
+    "description": "Message to check back later for news updates"
+  },
+
+  "tryAgain" : "حاول مرة اخرى",
+  
+  "todoTitle": "العنوان",
+  "@todoTitle": {
+    "description": "Label for task title field"
+  },
+  
+  "todoEnterTitle": "الرجاء إدخال عنوان",
+  "@todoEnterTitle": {
+    "description": "Validation message for empty title"
+  },
+  
+  "todoDescription": "الوصف",
+  "@todoDescription": {
+    "description": "Label for task description field"
+  },
+  
+  "todoImportance": "الأهمية",
+  "@todoImportance": {
+    "description": "Label for task importance section"
+  },
+  
+  "todoImportanceLow": "منخفضة",
+  "@todoImportanceLow": {
+    "description": "Label for low importance option"
+  },
+  
+  "todoImportanceMedium": "متوسطة",
+  "@todoImportanceMedium": {
+    "description": "Label for medium importance option"
+  },
+  
+  "todoImportanceHigh": "عالية",
+  "@todoImportanceHigh": {
+    "description": "Label for high importance option"
+  },
+  
+  "todoNoDueDate": "لا يوجد تاريخ استحقاق",
+  "@todoNoDueDate": {
+    "description": "Text shown when no due date is set"
+  },
+  
+  "todoConfirmDelete": "تأكيد الحذف",
+  "@todoConfirmDelete": {
+    "description": "Title for delete confirmation dialog"
+  },
+  
+  "todoDeleteConfirmation": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
+  "@todoDeleteConfirmation": {
+    "description": "Message for delete confirmation dialog"
+  },
+  
+  "todoCancel": "إلغاء",
+  "@todoCancel": {
+    "description": "Label for cancel button"
+  },
+  
+  "todoDelete": "حذف",
+  "@todoDelete": {
+    "description": "Label for delete button"
+  }
+}
