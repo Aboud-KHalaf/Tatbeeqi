@@ -23,8 +23,6 @@ Color getColorByImportance(ToDoImportance importance) {
       return Colors.orange.shade200;
     case ToDoImportance.low:
       return Colors.green.shade200;
-    default:
-      return Colors.cyan.shade200;
   }
 }
 
